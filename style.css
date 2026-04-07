@@ -26,9 +26,6 @@
     box-sizing: border-box;
 }
 
-html {
-    scroll-behavior: smooth; /* Essencial para o JS de rolagem */
-}
 
 body {
     font-family: 'Poppins', sans-serif;

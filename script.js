@@ -27,39 +27,39 @@ document.addEventListener('DOMContentLoaded', () => {
                 });
             }
         });
+    });
 
-        // --- Lógica do Modal de Certificados ---
+    // --- Lógica do Modal de Certificados ---
 
-        const modal = document.getElementById('modal-visualizador');
-        const modalImg = document.getElementById('img-full');
-        const captionText = document.getElementById('legenda');
-        const closeBtn = document.querySelector('.fechar');
+    const modal = document.getElementById('modal-visualizador');
+    const modalImg = document.getElementById('img-full');
+    const captionText = document.getElementById('legenda');
+    const closeBtn = document.querySelector('.fechar');
 
-        // Seleciona todas as imagens dentro dos cards de certificado
-        const certImages = document.querySelectorAll('.cert-img');
+    // Seleciona todas as imagens dentro dos cards de certificado
+    const certImages = document.querySelectorAll('.cert-img');
 
-        certImages.forEach(img => {
-            // Ao clicar na imagem (ou no card pai, se preferir ajustar o seletor)
-            img.closest('.certificado-card').addEventListener('click', () => {
-                modal.style.display = "block";
-                modalImg.src = img.src; // Pega o src da imagem clicada
-                captionText.innerHTML = img.alt; // Usa o alt como legenda
-            });
+    certImages.forEach(img => {
+        // Ao clicar na imagem (ou no card pai, se preferir ajustar o seletor)
+        img.closest('.certificado-card').addEventListener('click', () => {
+            modal.style.display = "block";
+            modalImg.src = img.src; // Pega o src da imagem clicada
+            captionText.innerHTML = img.alt; // Usa o alt como legenda
         });
+    });
 
-        // Função para fechar o modal
-        if (closeBtn) {
-            closeBtn.addEventListener('click', () => {
-                modal.style.display = "none";
-            });
+    // Função para fechar o modal
+    if (closeBtn) {
+        closeBtn.addEventListener('click', () => {
+            modal.style.display = "none";
+        });
+    }
+
+    // Fecha o modal se clicar fora da imagem (no fundo escuro)
+    window.addEventListener('click', (e) => {
+        if (e.target === modal) {
+            modal.style.display = "none";
         }
-
-        // Fecha o modal se clicar fora da imagem (no fundo escuro)
-        window.addEventListener('click', (e) => {
-            if (e.target === modal) {
-                modal.style.display = "none";
-            }
-        });
     });
 
     // Bônus: Animação de "fade-in" ao rolar (Moderno)
