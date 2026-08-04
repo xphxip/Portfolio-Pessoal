@@ -137,7 +137,34 @@ function App() {
   }, []);
 
   return (
-    <>
+    <div className="app-shell">
+      <div className="page-background" aria-hidden="true">
+        <div className="hero-waves-holder">
+          <GradientWaves
+            horizonColor="#5227FF"
+            waveColor="#FF9FFC"
+            crestColor="#FFFFFF"
+            speed={0.4}
+            amplitude={2.5}
+            waveScale={0.6}
+            waveRatio={0.9}
+            swell={35}
+            turbulence={20}
+            tilt={1.11}
+            zoom={1}
+            height={5.5}
+            fogDepth={15}
+            detail="medium"
+            brightness={1}
+            opacity={1}
+            mouseInteraction
+            parallaxStrength={0.5}
+            grain
+            grainIntensity={0.05}
+          />
+        </div>
+      </div>
+
       <header>
         <nav className="navbar">
           <div className="container">
@@ -154,32 +181,6 @@ function App() {
       </header>
 
       <section id="home" className="hero">
-        <div className="hero-background" aria-hidden="true">
-          <div className="hero-waves-holder" style={{ width: '100%', height: '600px', position: 'relative' }}>
-            <GradientWaves
-              horizonColor="#5227FF"
-              waveColor="#FF9FFC"
-              crestColor="#FFFFFF"
-              speed={0.4}
-              amplitude={2.5}
-              waveScale={0.6}
-              waveRatio={0.9}
-              swell={35}
-              turbulence={20}
-              tilt={1.11}
-              zoom={1}
-              height={5.5}
-              fogDepth={15}
-              detail="medium"
-              brightness={1}
-              opacity={1}
-              mouseInteraction
-              parallaxStrength={0.5}
-              grain
-              grainIntensity={0.05}
-            />
-          </div>
-        </div>
         <div className="container">
           <h1>Olá, eu sou <span>Leandro Nascimento Lucatelli</span></h1>
           <p>Desenvolvedor focado em criar experiências web modernas e responsivas.</p>
@@ -273,7 +274,7 @@ function App() {
           <p>© 2026 Leandro Nascimento Lucatelli. Todos os direitos reservados.</p>
         </div>
       </footer>
-    </>
+    </div>
   );
 }
 

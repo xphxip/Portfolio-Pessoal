@@ -29,9 +29,48 @@
 
 body {
     font-family: 'Poppins', sans-serif;
-    background-color: var(--cor-preto-fundo);
+    background:
+        radial-gradient(circle at top left, rgba(82, 39, 255, 0.42), transparent 36%),
+        radial-gradient(circle at top right, rgba(255, 159, 252, 0.32), transparent 38%),
+        linear-gradient(180deg, #12091f 0%, #09090c 60%, #050507 100%);
+    background-attachment: fixed;
     color: var(--cor-texto-principal);
     line-height: 1.6;
+    overflow-x: hidden;
+}
+
+body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: -2;
+    background:
+        radial-gradient(circle at center, rgba(255, 255, 255, 0.06), transparent 44%),
+        linear-gradient(180deg, rgba(8, 8, 12, 0.15), rgba(8, 8, 12, 0.85));
+}
+
+.app-shell {
+    position: relative;
+    isolation: isolate;
+}
+
+.page-background {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+}
+
+.hero-waves-holder {
+    width: 100vw;
+    height: 100vh;
+    position: relative;
+}
+
+.gradient-waves-container {
+    position: absolute;
+    inset: 0;
 }
 
 .container {
@@ -80,6 +119,8 @@ img {
 
 .section {
     padding: 6rem 0;
+    position: relative;
+    z-index: 1;
 }
 
 /* --- Botões (Efeito Camaleão) --- */
@@ -110,9 +151,9 @@ img {
 
 /* --- Navegação --- */
 .navbar {
-    background-color: rgba(13, 13, 13, 0.85); /* Fundo com transparência */
-    backdrop-filter: blur(10px);
-    border-bottom: 1px solid #222;
+    background: rgba(12, 10, 20, 0.45);
+    backdrop-filter: blur(14px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
     padding: 1rem 0;
     position: fixed;
     width: 100%;
@@ -180,16 +221,12 @@ img {
     position: relative;
     isolation: isolate;
     overflow: hidden;
-    height: 100vh;
+    min-height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
     text-align: center;
-    padding-top: 60px; /* Para compensar a navbar fixa */
-    background:
-        radial-gradient(circle at top left, rgba(82, 39, 255, 0.45), transparent 32%),
-        radial-gradient(circle at top right, rgba(255, 159, 252, 0.34), transparent 40%),
-        linear-gradient(180deg, #160922 0%, #0d0d0d 60%, #0a0a0a 100%);
+    padding-top: 80px;
 }
 
 .hero-background {
@@ -232,6 +269,12 @@ img {
 .hero .container {
     position: relative;
     z-index: 1;
+    background: rgba(13, 11, 22, 0.42);
+    backdrop-filter: blur(18px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 24px;
+    padding: 2.5rem 2rem;
+    box-shadow: 0 18px 48px rgba(3, 3, 6, 0.45);
 }
 
 .hero h1 {
@@ -299,18 +342,19 @@ img {
 }
 
 .projeto-card {
-    background-color: var(--cor-preto-secundario);
-    border-radius: 12px;
+    background: rgba(18, 18, 24, 0.75);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 16px;
     overflow: hidden;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    border-left: 4px solid transparent; /* Para o efeito hover */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.28);
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+    border-left: 4px solid rgba(155, 89, 182, 0.4);
 }
 
 .projeto-card:hover {
     transform: translateY(-8px);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
-    border-left: 4px solid var(--cor-roxo-1); /* Efeito roxo no hover */
+    box-shadow: 0 16px 32px rgba(0, 0, 0, 0.42);
+    border-left: 4px solid var(--cor-roxo-1);
 }
 
 .projeto-card img {
