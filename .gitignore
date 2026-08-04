@@ -2,3 +2,8 @@
 
 #Ignore vscode AI rules
 .github\instructions\codacy.instructions.md
+
+# Build and dependency artifacts
+node_modules/
+dist/
+package-lock.json

@@ -177,17 +177,75 @@ img {
 
 /* --- Seção Hero (Início) --- */
 .hero {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
     height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
     text-align: center;
     padding-top: 60px; /* Para compensar a navbar fixa */
+    background:
+        radial-gradient(circle at top left, rgba(82, 39, 255, 0.45), transparent 32%),
+        radial-gradient(circle at top right, rgba(255, 159, 252, 0.34), transparent 40%),
+        linear-gradient(180deg, #160922 0%, #0d0d0d 60%, #0a0a0a 100%);
+}
+
+.hero-background {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.hero-wave {
+    position: absolute;
+    left: -10%;
+    width: 120%;
+    border-radius: 48% 52% 0 0 / 100% 100% 0 0;
+    opacity: 0.9;
+    filter: blur(2px);
+}
+
+.hero-wave-1 {
+    bottom: -130px;
+    height: 360px;
+    background: linear-gradient(180deg, rgba(82, 39, 255, 0.8), rgba(255, 159, 252, 0.5));
+    animation: waveFloat 14s ease-in-out infinite alternate;
+}
+
+.hero-wave-2 {
+    bottom: -180px;
+    height: 420px;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.28), rgba(82, 39, 255, 0.22));
+    animation: waveFloat 18s ease-in-out infinite alternate-reverse;
+}
+
+.hero-wave-3 {
+    bottom: -220px;
+    height: 480px;
+    background: linear-gradient(180deg, rgba(255, 159, 252, 0.25), rgba(255, 255, 255, 0.1));
+    animation: waveFloat 20s ease-in-out infinite alternate;
+}
+
+.hero .container {
+    position: relative;
+    z-index: 1;
 }
 
 .hero h1 {
     font-size: 3.5rem;
     margin-bottom: 1rem;
+}
+
+@keyframes waveFloat {
+    from {
+        transform: translateX(-2%) translateY(8px) scaleX(1);
+    }
+    to {
+        transform: translateX(2%) translateY(-10px) scaleX(1.03);
+    }
 }
 
 /* Destaque do nome com o gradiente */
