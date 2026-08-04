@@ -1,16 +1,16 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import GradientWaves from './GradientWaves.jsx';
 
 const projetos = [
   {
     image: '/Images/Portfolio3D.png',
-    title: 'Portfolio3d',
-    desc: 'Um Portfolio3d Moderno Bonito e funcional, destacando as tecnologias (HTML, CSS, JS).',
+    title: 'Portfolio3D',
+    desc: 'Um Portfolio3D Moderno, bonito e funcional, destacando tecnologias web de alta performance.',
     demo: 'https://portfoliorobot3d.netlify.app/',
     github: null,
   },
   {
-    image: '/Images/crud-python.png',
+    image: '/Images/crud-python.svg',
     title: 'CRUD em Python',
     desc: 'Uma aplicação CRUD completa desenvolvida em Python com Flask e SQLAlchemy, com design moderno e funcional.',
     demo: 'https://crud-git-main-xphxips-projects.vercel.app',
@@ -18,20 +18,20 @@ const projetos = [
   },
   {
     image: '/Images/Barbearia-vertex.png',
-    title: 'barbearia-vertex',
-    desc: 'Uma Landinpage para barbearia totalmente moderna e funcional, destacando as tecnologias (HTML, CSS, JS).',
+    title: 'Barbearia Vertex',
+    desc: 'Uma Landing page para barbearia totalmente moderna e funcional, destacando as tecnologias (HTML, CSS, JS).',
     demo: 'https://barbearia-vertex.netlify.app/',
     github: null,
   },
   {
-    image: '/Images/app-financeiro.png',
+    image: '/Images/app-financeiro.svg',
     title: 'App Financeiro',
     desc: 'Um aplicativo financeiro moderno para controle de gastos e receitas, construído com tecnologias web (HTML, CSS, JS).',
     demo: 'https://controle-financeiro-ochre-delta.vercel.app/',
     github: 'https://github.com/xphxip/Controle-Financeiro',
   },
   {
-    image: '/Images/pirpg.png',
+    image: '/Images/pirpg.svg',
     title: 'PIRPG',
     desc: 'Um jogo RPG desenvolvido em Flutter com mapas Tiled, personagens animados e sistema de câmera.',
     demo: null,
@@ -43,76 +43,38 @@ const certificados = [
   {
     image: '/Certificadosimg/Certificado01.png',
     title: 'IMPLEMENTANDO BANCO DE DADOS',
-    desc: 'Certificamos que LEANDRO NASCIMENTO LUCATELLI, concluiu o curso autoinstrucional IMPLEMENTANDO BANCO DE DADOS, com carga horária de 15 hora(s).',
+    desc: 'Certificamos que LEANDRO NASCIMENTO LUCATELLI concluiu o curso autoinstrucional IMPLEMENTANDO BANCO DE DADOS, com carga horária de 15 hora(s).',
     pdf: '/Certificados/IMPLEMENTANDO BANCO DE DADOS.pdf',
     alt: 'Certificado - Implementando Banco de Dados'
   },
   {
     image: '/Certificadosimg/Certificado02.png',
     title: 'FUNDAMENTOS DE TI HARDWARE E SOFTWARE',
-    desc: 'Certificamos que LEANDRO NASCIMENTO LUCATELLI, concluiu o curso autoinstrucional FUNDAMENTOS DE TI: HARDWARE E SOFTWARE, com carga horária de 7 hora(s).',
+    desc: 'Certificamos que LEANDRO NASCIMENTO LUCATELLI concluiu o curso autoinstrucional FUNDAMENTOS DE TI: HARDWARE E SOFTWARE, com carga horária de 7 hora(s).',
     pdf: '/Certificados/FUNDAMENTOS DE TI HARDWARE E SOFTWARE.pdf',
     alt: 'Certificado - Fundamentos de TI Hardware e Software'
   },
   {
     image: '/Certificadosimg/Certificado03.png',
     title: 'Python Básico',
-    desc: 'Certificamos que LEANDRO NASCIMENTO LUCATELLI, concluiu o curso autoinstrucional LINGUAGEM DE PROGRAMAÇÃO PYTHON - BÁSICO, com carga horária de 18 hora(s).',
+    desc: 'Certificamos que LEANDRO NASCIMENTO LUCATELLI concluiu o curso autoinstrucional LINGUAGEM DE PROGRAMAÇÃO PYTHON - BÁSICO, com carga horária de 18 hora(s).',
     pdf: '/Certificados/Python Basico.pdf',
     alt: 'Certificado - Python Básico'
   },
   {
     image: '/Certificadosimg/Certificado04.png',
     title: 'Python Objetos',
-    desc: 'Certificamos que LEANDRO NASCIMENTO LUCATELLI, concluiu o curso autoinstrucional DESENVOLVIMENTO ORIENTADO A OBJETOS UTILIZANDO A LINGUAGEM PYTHON, com carga horária de 10 hora(s).',
+    desc: 'Certificamos que LEANDRO NASCIMENTO LUCATELLI concluiu o curso autoinstrucional DESENVOLVIMENTO ORIENTADO A OBJETOS UTILIZANDO A LINGUAGEM PYTHON, com carga horária de 10 hora(s).',
     pdf: '/Certificados/Python Objetos.pdf',
     alt: 'Certificado - Python Objetos'
   }
 ];
 
 function App() {
+  const [selectedCert, setSelectedCert] = useState(null);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
   useEffect(() => {
-    const navLinks = document.querySelectorAll('.nav-link[href^="#"]');
-    navLinks.forEach((link) => {
-      link.addEventListener('click', function (e) {
-        e.preventDefault();
-        const targetId = this.getAttribute('href');
-        const targetSection = document.querySelector(targetId);
-        if (targetSection) {
-          const navBarHeight = document.querySelector('.navbar').offsetHeight;
-          const targetPosition = targetSection.offsetTop - navBarHeight;
-          window.scrollTo({
-            top: targetPosition,
-            behavior: 'smooth'
-          });
-        }
-      });
-    });
-
-    const modal = document.getElementById('modal-visualizador');
-    const modalImg = document.getElementById('img-full');
-    const captionText = document.getElementById('legenda');
-    const closeBtn = document.querySelector('.fechar');
-    const certImages = document.querySelectorAll('.cert-img');
-
-    certImages.forEach((img) => {
-      img.closest('.certificado-card')?.addEventListener('click', () => {
-        modal.style.display = 'block';
-        modalImg.src = img.src;
-        captionText.innerHTML = img.alt;
-      });
-    });
-
-    if (closeBtn) {
-      closeBtn.addEventListener('click', () => {
-        modal.style.display = 'none';
-      });
-    }
-
-    window.addEventListener('click', (e) => {
-      if (e.target === modal) modal.style.display = 'none';
-    });
-
     const sections = document.querySelectorAll('.section');
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
@@ -135,6 +97,26 @@ function App() {
       observer.disconnect();
     };
   }, []);
+
+  const handleNavClick = (e, targetId) => {
+    e.preventDefault();
+    setMobileMenuOpen(false);
+    const targetSection = document.querySelector(targetId);
+    if (targetSection) {
+      const navBar = document.querySelector('.navbar');
+      const navBarHeight = navBar ? navBar.offsetHeight : 80;
+      const targetPosition = targetSection.offsetTop - navBarHeight;
+      window.scrollTo({
+        top: targetPosition,
+        behavior: 'smooth'
+      });
+    }
+  };
+
+  const handleImageError = (e) => {
+    e.target.onerror = null;
+    e.target.src = 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="400" height="200" viewBox="0 0 400 200"><rect width="400" height="200" fill="%231e1b4b"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="%23a78bfa" font-family="sans-serif" font-size="16">Preview não disponível</text></svg>';
+  };
 
   return (
     <div className="app-shell">
@@ -168,13 +150,24 @@ function App() {
       <header>
         <nav className="navbar">
           <div className="container">
-            <a href="#home" className="nav-logo">LNL.</a>
-            <ul className="nav-menu">
-              <li className="nav-item"><a href="#home" className="nav-link">Início</a></li>
-              <li className="nav-item"><a href="#sobre" className="nav-link">Sobre</a></li>
-              <li className="nav-item"><a href="#projetos" className="nav-link">Projetos</a></li>
-              <li className="nav-item"><a href="#certificados" className="nav-link">Certificados</a></li>
-              <li className="nav-item"><a href="#contato" className="nav-link">Contato</a></li>
+            <a href="#home" onClick={(e) => handleNavClick(e, '#home')} className="nav-logo">LNL.</a>
+            
+            <button
+              className={`nav-toggle ${mobileMenuOpen ? 'active' : ''}`}
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              aria-label="Alternar menu de navegação"
+            >
+              <span></span>
+              <span></span>
+              <span></span>
+            </button>
+
+            <ul className={`nav-menu ${mobileMenuOpen ? 'active' : ''}`}>
+              <li className="nav-item"><a href="#home" onClick={(e) => handleNavClick(e, '#home')} className="nav-link">Início</a></li>
+              <li className="nav-item"><a href="#sobre" onClick={(e) => handleNavClick(e, '#sobre')} className="nav-link">Sobre</a></li>
+              <li className="nav-item"><a href="#projetos" onClick={(e) => handleNavClick(e, '#projetos')} className="nav-link">Projetos</a></li>
+              <li className="nav-item"><a href="#certificados" onClick={(e) => handleNavClick(e, '#certificados')} className="nav-link">Certificados</a></li>
+              <li className="nav-item"><a href="#contato" onClick={(e) => handleNavClick(e, '#contato')} className="nav-link">Contato</a></li>
             </ul>
           </div>
         </nav>
@@ -184,7 +177,7 @@ function App() {
         <div className="container">
           <h1>Olá, eu sou <span>Leandro Nascimento Lucatelli</span></h1>
           <p>Desenvolvedor focado em criar experiências web modernas e responsivas.</p>
-          <a href="#projetos" className="btn btn-primary">Ver Meus Projetos</a>
+          <a href="#projetos" onClick={(e) => handleNavClick(e, '#projetos')} className="btn btn-primary">Ver Meus Projetos</a>
         </div>
       </section>
 
@@ -200,7 +193,7 @@ function App() {
                 <span className="skill">JavaScript (ES6+)</span>
                 <span className="skill">SQL</span>
                 <span className="skill">C/C++</span>
-                <span className="skill">Python/Pycharm</span>
+                <span className="skill">Python/PyCharm</span>
                 <span className="skill">MongoDB</span>
                 <span className="skill">Dart</span>
                 <span className="skill">Firebase</span>
@@ -212,16 +205,26 @@ function App() {
 
       <section id="projetos" className="section">
         <div className="container">
-          <h2>Meus Projetos (5)</h2>
+          <h2>Meus Projetos ({projetos.length})</h2>
           <div className="projetos-grid">
             {projetos.map((projeto) => (
               <div className="projeto-card" key={projeto.title}>
-                <img src={projeto.image} alt={`Captura de tela do projeto ${projeto.title}`} />
+                <img
+                  src={projeto.image}
+                  alt={`Captura de tela do projeto ${projeto.title}`}
+                  onError={handleImageError}
+                />
                 <h3>{projeto.title}</h3>
                 <p>{projeto.desc}</p>
                 <div className="projeto-links">
-                  {projeto.demo ? <a href={projeto.demo} target="_blank" rel="noreferrer" className="btn">Ver Demo</a> : null}
-                  {projeto.github ? <a href={projeto.github} target="_blank" rel="noreferrer" className="btn">GitHub</a> : <a href="#" className="btn" style={{ opacity: 0.5, pointerEvents: 'none' }} aria-disabled="true">GitHub</a>}
+                  {projeto.demo ? (
+                    <a href={projeto.demo} target="_blank" rel="noreferrer" className="btn">Ver Demo</a>
+                  ) : null}
+                  {projeto.github ? (
+                    <a href={projeto.github} target="_blank" rel="noreferrer" className="btn">GitHub</a>
+                  ) : (
+                    <span className="btn btn-disabled">GitHub</span>
+                  )}
                 </div>
               </div>
             ))}
@@ -234,15 +237,32 @@ function App() {
           <h2>Meus Certificados</h2>
           <div className="projetos-grid">
             {certificados.map((certificado) => (
-              <div className="projeto-card certificado-card" key={certificado.title}>
+              <div
+                className="projeto-card certificado-card"
+                key={certificado.title}
+                onClick={() => setSelectedCert(certificado)}
+              >
                 <div className="img-container">
-                  <img src={certificado.image} alt={certificado.alt} className="cert-img" />
+                  <img
+                    src={certificado.image}
+                    alt={certificado.alt}
+                    className="cert-img"
+                    onError={handleImageError}
+                  />
                   <div className="overlay"><i className="fas fa-search-plus"></i></div>
                 </div>
                 <h3>{certificado.title}</h3>
                 <p>{certificado.desc}</p>
                 <div className="projeto-links" style={{ justifyContent: 'center' }}>
-                  <a href={certificado.pdf} target="_blank" rel="noreferrer" className="btn"><i className="fas fa-file-pdf"></i> Ver PDF Original</a>
+                  <a
+                    href={certificado.pdf}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="btn"
+                    onClick={(e) => e.stopPropagation()}
+                  >
+                    <i className="fas fa-file-pdf"></i> Ver PDF Original
+                  </a>
                 </div>
               </div>
             ))}
@@ -250,11 +270,18 @@ function App() {
         </div>
       </section>
 
-      <div id="modal-visualizador" className="modal">
-        <span className="fechar">&times;</span>
-        <img className="modal-conteudo" id="img-full" alt="Visualização ampliada" />
-        <div id="legenda"></div>
-      </div>
+      {selectedCert && (
+        <div className="modal" style={{ display: 'block' }} onClick={() => setSelectedCert(null)}>
+          <span className="fechar" onClick={() => setSelectedCert(null)}>&times;</span>
+          <img
+            className="modal-conteudo"
+            src={selectedCert.image}
+            alt={selectedCert.alt}
+            onClick={(e) => e.stopPropagation()}
+          />
+          <div id="legenda">{selectedCert.alt}</div>
+        </div>
+      )}
 
       <section id="contato" className="section">
         <div className="container">

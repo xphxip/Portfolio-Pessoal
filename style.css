@@ -29,25 +29,11 @@
 
 body {
     font-family: 'Poppins', sans-serif;
-    background:
-        radial-gradient(circle at top left, rgba(82, 39, 255, 0.42), transparent 36%),
-        radial-gradient(circle at top right, rgba(255, 159, 252, 0.32), transparent 38%),
-        linear-gradient(180deg, #12091f 0%, #09090c 60%, #050507 100%);
-    background-attachment: fixed;
+    background: linear-gradient(180deg, #12091f 0%, #050507 100%);
     color: var(--cor-texto-principal);
     line-height: 1.6;
     overflow-x: hidden;
-}
-
-body::before {
-    content: '';
-    position: fixed;
-    inset: 0;
-    pointer-events: none;
-    z-index: -2;
-    background:
-        radial-gradient(circle at center, rgba(255, 255, 255, 0.06), transparent 44%),
-        linear-gradient(180deg, rgba(8, 8, 12, 0.15), rgba(8, 8, 12, 0.85));
+    min-height: 100vh;
 }
 
 .app-shell {
@@ -58,14 +44,15 @@ body::before {
 .page-background {
     position: fixed;
     inset: 0;
-    z-index: -1;
+    z-index: 0;
     pointer-events: none;
 }
 
 .hero-waves-holder {
-    width: 100vw;
-    height: 100vh;
-    position: relative;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    inset: 0;
 }
 
 .gradient-waves-container {
@@ -119,6 +106,11 @@ img {
 
 .section {
     padding: 6rem 0;
+    position: relative;
+    z-index: 1;
+}
+
+footer {
     position: relative;
     z-index: 1;
 }
@@ -219,6 +211,7 @@ img {
 /* --- Seção Hero (Início) --- */
 .hero {
     position: relative;
+    z-index: 1;
     isolation: isolate;
     overflow: hidden;
     min-height: 100vh;
@@ -435,38 +428,100 @@ footer p {
 }
 
 /* --- Responsividade (Mobile) --- */
+.nav-toggle {
+    display: none;
+    flex-direction: column;
+    justify-content: space-around;
+    width: 30px;
+    height: 25px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    z-index: 1001;
+}
+
+.nav-toggle span {
+    width: 30px;
+    height: 3px;
+    background: var(--cor-texto-principal);
+    border-radius: 2px;
+    transition: all 0.3s ease;
+}
+
+.btn-disabled {
+    opacity: 0.5;
+    pointer-events: none;
+    cursor: not-allowed;
+    background: #333 !important;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
 @media (max-width: 768px) {
     .container {
         padding: 0 1rem;
     }
 
     h1 {
-        font-size: 2.5rem;
+        font-size: 2.3rem;
     }
 
     h2 {
-        font-size: 2rem;
+        font-size: 1.8rem;
     }
 
     .hero p {
-        font-size: 1.1rem;
+        font-size: 1rem;
     }
 
-    /* Ocultar menu padrão no mobile (se fôssemos fazer um 'hambúrguer') */
-    /* Por simplicidade, vamos apenas ajustar */
-    .nav-menu {
-        /* Você pode implementar um menu hambúrguer aqui com JS */
-        /* Por enquanto, apenas ajustamos o espaçamento */
-        gap: 0.5rem;
-        margin-left: 0;
+    .nav-toggle {
+        display: flex;
     }
+
+    .nav-toggle.active span:nth-child(1) {
+        transform: rotate(45deg) translate(6px, 6px);
+    }
+
+    .nav-toggle.active span:nth-child(2) {
+        opacity: 0;
+    }
+
+    .nav-toggle.active span:nth-child(3) {
+        transform: rotate(-45deg) translate(6px, -6px);
+    }
+
+    .nav-menu {
+        position: fixed;
+        top: 70px;
+        left: 0;
+        width: 100%;
+        background: rgba(12, 10, 20, 0.95);
+        backdrop-filter: blur(16px);
+        flex-direction: column;
+        align-items: center;
+        padding: 2rem 0;
+        gap: 1.5rem;
+        transform: translateY(-150%);
+        transition: transform 0.4s ease-in-out;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .nav-menu.active {
+        transform: translateY(0);
+    }
+
     .nav-item {
         margin-left: 0;
     }
+
     .nav-link {
-        font-size: 0.9rem;
-        padding: 5px;
+        font-size: 1.1rem;
+        padding: 8px 16px;
     }
+
     .nav-logo {
         font-size: 1.5rem;
     }
