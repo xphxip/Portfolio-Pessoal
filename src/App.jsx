@@ -67,6 +67,27 @@ const certificados = [
     desc: 'Certificamos que LEANDRO NASCIMENTO LUCATELLI concluiu o curso autoinstrucional DESENVOLVIMENTO ORIENTADO A OBJETOS UTILIZANDO A LINGUAGEM PYTHON, com carga horária de 10 hora(s).',
     pdf: '/Certificados/Python Objetos.pdf',
     alt: 'Certificado - Python Objetos'
+  },
+  {
+    image: '/Certificadosimg/Design criativo tipos e formas.png',
+    title: 'Design Criativo: Tipos e Formas',
+    desc: 'Certificamos que LEANDRO NASCIMENTO LUCATELLI concluiu o curso de Design criativo: tipos e formas.',
+    pdf: '/Certificados/Design criativo tipos e formas.pdf',
+    alt: 'Certificado - Design Criativo: Tipos e Formas'
+  },
+  {
+    image: '/Certificadosimg/Princípios essenciais do design gráfico.png',
+    title: 'Princípios Essenciais do Design Gráfico',
+    desc: 'Certificamos que LEANDRO NASCIMENTO LUCATELLI concluiu o curso de Princípios essenciais do design gráfico.',
+    pdf: '/Certificados/Princípios essenciais do design gráfico.pdf',
+    alt: 'Certificado - Princípios Essenciais do Design Gráfico'
+  },
+  {
+    image: '/Certificadosimg/UX criativo design de interfaces que conectam.png',
+    title: 'UX Criativo: Design de Interfaces que Conectam',
+    desc: 'Certificamos que LEANDRO NASCIMENTO LUCATELLI concluiu o curso de UX criativo: design de interfaces que conectam.',
+    pdf: '/Certificados/UX criativo design de interfaces que conectam.pdf',
+    alt: 'Certificado - UX Criativo: Design de Interfaces que Conectam'
   }
 ];
 
