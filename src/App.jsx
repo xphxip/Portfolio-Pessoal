@@ -171,7 +171,6 @@ function App() {
       <header>
         <nav className="navbar">
           <div className="container">
-            <a href="#home" onClick={(e) => handleNavClick(e, '#home')} className="nav-logo">LNL.</a>
             
             <button
               className={`nav-toggle ${mobileMenuOpen ? 'active' : ''}`}

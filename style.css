@@ -155,7 +155,7 @@ footer {
 
 .navbar .container {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
 }
 
@@ -177,6 +177,10 @@ footer {
 
 .nav-item {
     margin-left: 2rem;
+}
+
+.nav-item:first-child {
+    margin-left: 0;
 }
 
 .nav-link {
